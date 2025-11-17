@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 문의 접수</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            font-weight: 600;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 15px;
+        }
+
+        tr {
+            transition: all 0.3s ease;
+        }
+
+        td {
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        td:first-child {
+            width: 150px;
+            font-weight: 600;
+            color: #555;
+            padding-top: 15px;
+        }
+
+        label {
+            font-size: 0.95em;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Input 공통 스타일 */
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            background-color: #f8f9fa;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* Select 스타일 */
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23667eea' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            padding-right: 40px;
+        }
+
+        /* Textarea 스타일 */
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Radio 버튼 스타일 */
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #d0d0d0;
+            border-radius: 50%;
+            margin-right: 8px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        input[type="radio"]:checked {
+            border-color: #667eea;
+            background-color: #667eea;
+        }
+
+        input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input[type="radio"]:hover {
+            border-color: #667eea;
+        }
+
+        .radio-label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* Checkbox 스타일 */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        input[type="checkbox"] {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #d0d0d0;
+            border-radius: 4px;
+            margin-right: 10px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            vertical-align: middle;
+        }
+
+        input[type="checkbox"]:checked {
+            background-color: #667eea;
+            border-color: #667eea;
+        }
+
+        input[type="checkbox"]:checked::after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        input[type="checkbox"]:hover {
+            border-color: #667eea;
+        }
+
+        .checkbox-label {
+            display: inline-flex;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        /* 버튼 스타일 */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 14px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        button[type="reset"] {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        button[type="reset"]:hover {
+            background: #f8f9fa;
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            table {
+                border-spacing: 0 10px;
+            }
+
+            td:first-child {
+                width: 100%;
+                display: block;
+                padding-bottom: 5px;
+            }
+
+            td:last-child {
+                width: 100%;
+                display: block;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>고객 문의 접수</h1>
+        
+        <form action="#" method="post">
+            <table>
+                <tbody>
+                    <tr>
+                        <td><label for="customer-name">이름</label></td>
+                        <td><input type="text" id="customer-name" name="customerName" placeholder="홍길동"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="customer-email">이메일</label></td>
+                        <td><input type="email" id="customer-email" name="customerEmail" placeholder="example@email.com"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="customer-phone">전화번호</label></td>
+                        <td><input type="tel" id="customer-phone" name="customerPhone" placeholder="010-1234-5678"></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="inquiry-type">문의 유형</label></td>
+                        <td>
+                            <select id="inquiry-type" name="inquiryType">
+                                <option value="" disabled selected>선택하세요</option>
+                                <option value="product">상품문의</option>
+                                <option value="delivery">배송문의</option>
+                                <option value="exchange">교환/환불</option>
+                                <option value="etc">기타</option>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label>우선순위</label></td>
+                        <td>
+                            <div class="radio-group">
+                                <span class="radio-label">
+                                    <input type="radio" name="priority" id="priority1" value="low">
+                                    <label for="priority1">낮음</label>
+                                </span>
+                                <span class="radio-label">
+                                    <input type="radio" name="priority" id="priority2" value="normal">
+                                    <label for="priority2">보통</label>
+                                </span>
+                                <span class="radio-label">
+                                    <input type="radio" name="priority" id="priority3" value="high">
+                                    <label for="priority3">높음</label>
+                                </span>
+                                <span class="radio-label">
+                                    <input type="radio" name="priority" id="priority4" value="urgent">
+                                    <label for="priority4">긴급</label>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="inquiry-content">문의 내용</label></td>
+                        <td>
+                            <textarea id="inquiry-content" name="inquiryContent" placeholder="문의하실 내용을 상세히 입력해주세요."></textarea>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td>알림 수신 동의</td>
+                        <td>
+                            <div class="checkbox-group">
+                                <span class="checkbox-label">
+                                    <input type="checkbox" id="agree-email" name="agreeNotification" value="email">
+                                    <label for="agree-email">이메일 수신 동의</label>
+                                </span>
+                                <span class="checkbox-label">
+                                    <input type="checkbox" id="agree-sms" name="agreeNotification" value="sms">
+                                    <label for="agree-sms">SMS 수신 동의</label>
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="button-group">
+                <button type="submit">문의 접수</button>
+                <button type="reset">초기화</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

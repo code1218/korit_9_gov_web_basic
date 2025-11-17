@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고객 문의 접수</title>
+</head>
+<body>
+    <h1>고객 문의 접수</h1>
+    
+    <form action="#" method="post">
+        <table>
+            <tbody>
+                <tr>
+                    <td><label for="customer-name">이름</label></td>
+                    <td><input type="text" id="customer-name" name="customerName" ></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="customer-email">이메일</label></td>
+                    <td><input type="email" id="customer-email" name="customerEmail" ></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="customer-phone">전화번호</label></td>
+                    <td><input type="tel" id="customer-phone" name="customerPhone" ></td>
+                </tr>
+                
+                <tr>
+                    <td><label for="inquiry-type">문의 유형</label></td>
+                    <td>
+                        <select id="inquiry-type" name="inquiryType">
+                            <option value="" disabled selected>선택하세요</option>
+                            <option value="product">상품문의</option>
+                            <option value="delivery">배송문의</option>
+                            <option value="exchange">교환/환불</option>
+                            <option value="etc">기타</option>
+                        </select>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="priority">우선순위</label></td>
+                    <td>
+                        <input type="radio" name="priority" id="priority1">
+                        <label for="priority1">낮음</label>
+                        <input type="radio" name="priority" id="priority2">
+                        <label for="priority2">보통</label>
+                        <input type="radio" name="priority" id="priority3">
+                        <label for="priority3">높음</label>
+                        <input type="radio" name="priority" id="priority4">
+                        <label for="priority4">긴급</label>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td><label for="inquiry-content">문의 내용</label></td>
+                    <td>
+                        <textarea id="inquiry-content" name="inquiryContent" rows="10" cols="50"></textarea>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>알림 수신 동의</td>
+                    <td>
+                        <div>
+                            <input type="checkbox" id="agree-email" name="agreeNotification" value="email">
+                            <label for="agree-email">이메일 수신 동의</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="agree-sms" name="agreeNotification" value="sms">
+                            <label for="agree-sms">SMS 수신 동의</label>
+                        </div>
+                    </td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <button type="submit">문의 접수</button>
+                        <button type="reset">초기화</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+</body>
+</html>
