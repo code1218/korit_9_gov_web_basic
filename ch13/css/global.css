@@ -60,3 +60,14 @@ body {
         background-color: #ac3545;
     }
 }
+
+.btn-black {
+    background-color: #444444;
+    color: #ffffff;
+    &:hover {
+        background-color: #333333;
+    }
+    &:active {
+        background-color: #111111;
+    }
+}
