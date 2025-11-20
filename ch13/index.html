@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html {
+            height: 100vh;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 100%;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+            padding: 10px;
+            height: 50px;
+            background-color: aqua;
+
+            .main-title {
+                margin: 0;
+                font-size: 15px;
+                color: #fff;
+            }
+        }
+
+        main {
+            display: flex;
+            flex-grow: 1;
+            background-color: blue;
+        }
+
+        aside {
+            width: 200px;
+            height: 100%;
+            background-color: gray;
+        }
+
+        article {
+            flex-grow: 1;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="main-title">코리아IT아카데미부산</h1>
+    </header>
+    <main>
+        <aside>
+            <div class="aside-top">
+                <h2 class="aside-student-name">김동완</h2>
+                <div class="btn-group">
+                    <button class="btn">정보수정</button>
+                    <button class="btn">비밀번호변경</button>
+                </div>
+            </div>
+            <ul>
+
+            </ul>
+        </aside>
+        <article></article>
+    </main>
+</body>
+</html>
