@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /**
+         * async await
+         */
+        function callPromise(num) {
+            return new Promise((rs, rj) => {
+                console.log("프로미스 생성");
+                if (num % 2 !== 0) {
+                    rs("홀수");
+                } else {
+                    rj(new Error("짝수"));
+                }
+            });
+        }
+
+        callPromise(11)/*(1)*/.then(v => console.log(v)).catch(e => console.error(e));
+        callPromise(12)/*(2)*/.then(v => console.log(v)).catch(e => console.error(e));
+        
+        async function callPromise2(num) {
+            if (num % 2 !== 0) {
+                return "홀수";
+            } else {
+                throw new Error("짝수");
+            }
+        }
+
+        callPromise2(11).then(v => console.log(v)).catch(e => console.error(e));
+        callPromise2(12).then(v => console.log(v)).catch(e => console.error(e));
+
+        async function callPromise3(num) {
+            if (num % 2 !== 0) {
+                return "홀수";
+            } else {
+                throw new Error("짝수");
+            }
+        }
+        
+        async function asyncFunction() {
+            try {
+                const v = await callPromise3(11);
+                console.log(v);
+            } catch(e) {
+                console.error(e);
+            }
+    
+            try {
+                const v = await callPromise3(12);
+                console.log(v);
+            } catch(e) {
+                console.error(e);
+            }
+        }
+
+        asyncFunction();
+
+    </script>
+</body>
+</html>
