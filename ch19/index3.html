@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="input-container"></div>
+        <div class="table-container"></div>
+    </div>
+
+    <script>
+        let inputValues = {
+            username: "",
+            password: "",
+        }
+
+        let tableData = {
+            columns: ["username", "password"],
+            rows: [],
+        }
+
+        function textInput({className, name, value, onKeyUp}) {
+            const input = document.createElement("input");
+            input.classList.add(className);
+            input.name = name;
+            input.value = value;
+            input.onkeyup = onKeyUp;
+
+            return input;
+        }
+
+        function usernameTextInput() {
+            let props = {
+                className: "username-input",
+                name: "username",
+                value: inputValues.username,
+                onKeyUp: (e) => {
+                    console.log("키입력");
+                    console.log(e.target.value);
+                    inputValues = {
+                        ...inputValues,
+                        [e.target.name]: e.target.value,
+                    }
+                }
+            }
+
+            return textInput(props);
+        }
+
+        function passwordTextInput() {
+            let props = {
+                className: "password-input",
+                name: "password",
+                value: inputValues.password,
+                onKeyUp: (e) => {
+                    console.log("키입력");
+                    console.log(e.target.value);
+                    inputValues = {
+                        ...inputValues,
+                        [e.target.name]: e.target.value,
+                    }
+                }
+            }
+            return textInput(props);
+        }
+
+        function button({className, text, onClick}) {
+            const button = document.createElement("button");
+            button.classList.add(className);
+            button.innerText = text;
+            button.onclick = onClick;
+            return button;
+        }
+
+        function registerButton() {
+            let props = {
+                className: "register-button",
+                text: "추가",
+                onClick: (e) => {
+                    console.log("추가버튼 클릭!");
+                    const { username, password } = inputValues;
+                    tableData.rows.push([username, password]);
+                    tableRender();
+                },
+            }
+            return button(props);
+        }
+
+        function table({columns, rows}) {
+            const thead = document.createElement("thead");
+            const columnsTr = document.createElement("tr");
+            columns.forEach(text => {
+                const td = document.createElement("td");
+                console.log(td);
+                td.innerText = text;
+                columnsTr.appendChild(td);
+            });
+            const tbody = document.createElement("tbody");
+            rows.forEach(row => {
+                const rowTr = document.createElement("tr");
+                row.forEach(text => {
+                    const td = document.createElement("td");
+                    td.innerText = text;
+                    rowTr.appendChild(td);
+                });
+                tbody.appendChild(rowTr);
+            });
+            const table = document.createElement("table");
+            table.appendChild(thead);
+            table.appendChild(tbody);
+
+            return table;
+        }
+        
+        function render() {
+            const inputContainer = document.querySelector(".input-container");
+            inputContainer.appendChild(usernameTextInput());
+            inputContainer.appendChild(passwordTextInput());
+            inputContainer.appendChild(registerButton());
+
+            tableRender();
+        }
+
+        function tableRender() {
+            const tableContainer = document.querySelector(".table-container");
+            tableContainer.innerHTML = "";
+            tableContainer.appendChild(table(tableData));
+        }
+
+        render();
+
+    </script>
+</body>
+</html>
